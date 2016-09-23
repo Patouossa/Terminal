@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    tools:context=".CreateUserActivity"
+    android:paddingLeft="50dp">
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User"
+        android:id="@+id/userRadioBtn"
+        android:checked="false"
+        android:textColor="#000"
+        android:buttonTint="#fff"
+        />
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Admin"
+        android:id="@+id/adminRadioBtn"
+        android:checked="false"
+        android:textColor="#000"
+        android:buttonTint="#fff"
+        />
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Super Admin"
+        android:id="@+id/superAdminRadioBtn"
+        android:checked="false"
+        android:textColor="#000"
+        android:buttonTint="#fff"
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right">
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="166dp"
+        android:layout_height="wrap_content"
+        android:text="Ok"
+        android:id="@+id/btnOk"
+        android:background="#fff"
+        android:textColor="#3366f3"
+        android:layout_gravity="right" />
+</LinearLayout>

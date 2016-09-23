@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="jcscriptytest.com.test.LanguageActivity"
+    android:background="#000">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listViewLanguage"
+        android:divider="#ffffff"
+        android:background="#000000"
+        android:footerDividersEnabled="true"
+
+        />
+</LinearLayout>
