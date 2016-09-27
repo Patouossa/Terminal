@@ -7,19 +7,6 @@
 
     <!-- payment fragment layout -->
 
-    <EditText
-        android:layout_width="284dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/payment_editText"
-        android:layout_gravity="center"
-        android:textColor="#ffffff"
-        android:enabled="false"
-        android:editable="true"
-        android:gravity="center"
-        android:focusable="false" />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="132dp"
@@ -29,5 +16,14 @@
         android:textColor="#ffffff"
         android:layout_gravity="center_horizontal|top"
         android:gravity="center" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/edtxtUserName"
+        android:textColor="#fff"
+        android:layout_gravity="center" />
 
 </FrameLayout>
