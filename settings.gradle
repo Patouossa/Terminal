@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':acssmc-1.1.1', ':core-3.1.0', ':sdtapi', ':SmartCardLib', ':telpo_api'

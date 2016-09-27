@@ -30,12 +30,23 @@ public class EditUserActivity extends AppCompatActivity {
     Role role = null;
     Role[] roles = null;
     private ProgressDialog pDialog;
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Edit User");
 
+        int id = getIntent().getExtras().getInt("Id");
+        UserDAO userDAO = new UserDAO(EditUserActivity.this);
+        user = userDAO.getUserById(id);
+        if(user != null){
+            name = (EditText) findViewById(R.id.edtxtUserName);
+            name.setText(user.getUsername());
+            RoleDAO roleDAO = new RoleDAO(EditUserActivity.this);
+            role = roleDAO.getRoleById(user.getIdRole());
+        }
         setRoleBtn = (Button) findViewById(R.id.btnSetRole);
         saveBtn = (Button) findViewById(R.id.btnOk);
         //setting onclick listener for set role button
@@ -128,25 +139,36 @@ public class EditUserActivity extends AppCompatActivity {
                 pDialog.show();
                 name = (EditText) findViewById(R.id.edtxtUserName);
                 password = (EditText) findViewById(R.id.edtxtUserPass);
+                //password.setText("Old Password");
                 confirm_password = (EditText) findViewById(R.id.edtxtUserConfirmPass);
+                //confirm_password.setText("New Password");
                 if(name != null && password != null && confirm_password != null && role != null){
-                    if(password.getText().toString().equals(confirm_password.getText().toString())){
-                        UserDAO userDAO = new UserDAO(EditUserActivity.this);
-                        User user = new User(name.getText().toString(), password.getText().toString(), "" , "", "", "", 0, role.getId(), 0, 0, null, null);
-                        if(userDAO.insertUser(user)){
-                            pDialog.dismiss();
-                            Intent i = new Intent(EditUserActivity.this, ViewUsersActivity.class);
-                            startActivity(i);
+                    if(password.length() < 8){
+                        if(password.getText().toString().equals(confirm_password.getText().toString())){
+                            UserDAO userDAO = new UserDAO(EditUserActivity.this);
+                            user.setUsername(name.getText().toString());
+                            user.setPassword(password.getText().toString());
+                            user.setIdRole(role.getId());
+                            //User user = new User(name.getText().toString(), password.getText().toString(), "" , "", "", "", 0, role.getId(), 0, 0, null, null);
+                            if(userDAO.updateUser(user)){
+                                pDialog.dismiss();
+                                Intent i = new Intent(EditUserActivity.this, ViewUsersActivity.class);
+                                startActivity(i);
+                            }
+                            else{
+                                pDialog.dismiss();
+                                Toast.makeText(getBaseContext(), "An error occured during the creation of the user.", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else{
+                        else {
                             pDialog.dismiss();
-                            Toast.makeText(getBaseContext(), "An error occured during the creation of the user.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "Passwords dosn't match", Toast.LENGTH_SHORT).show();
                         }
                     }
                     else {
-                        pDialog.dismiss();
-                        Toast.makeText(getBaseContext(), "Passwords dosn't match", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "Password length must be at least 8 caracters.", Toast.LENGTH_SHORT).show();
                     }
+
                 }
                 else {
                     pDialog.dismiss();

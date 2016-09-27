@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import BO.User;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,7 +21,7 @@ public class UsersFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    User user;
     private UserCustomAdapter adapter;
     private ListView listView;
 
@@ -61,6 +63,7 @@ public class UsersFragment extends Fragment {
                 switch (u_item.getCode()){
                     case 101:
                         i = new Intent(getContext(), CreateUserActivity.class);
+                        i.putExtra("User", user);
                         startActivityForResult(i, 102);
                         break;
                     case 102:

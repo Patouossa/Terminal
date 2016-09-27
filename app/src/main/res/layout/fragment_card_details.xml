@@ -57,7 +57,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:id="@+id/edTxtLastName"
                 android:padding="5dp"
                 android:background="#fff" />
@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/edTxtCardNumber"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:padding="5dp"
                 android:background="#fff" />
 
@@ -103,7 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:textColor="#fff"
+                        android:textColor="#000"
                         android:ems="10"
                         android:id="@+id/edTxtExpireryMonth"
                         android:maxLength="2"
@@ -115,7 +115,8 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#fff">
+                    android:textColor="#fff"
+                    android:layout_marginLeft="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -130,7 +131,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:ems="10"
-                        android:textColor="#fff"
+                        android:textColor="#000"
                         android:id="@+id/edTxtExpireryYear"
                         android:maxLength="4"
                         android:padding="5dp"
@@ -153,7 +154,7 @@
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/edTxtCVV"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:maxLength="4"
                 android:padding="5dp"
                 android:background="#fff"/>

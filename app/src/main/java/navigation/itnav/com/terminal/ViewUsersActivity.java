@@ -12,30 +12,41 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import BO.User;
+import DAL.UserDAO;
 
 public class ViewUsersActivity extends AppCompatActivity {
     private CustomAdapter adapter;
     private ListView listView;
     private TextView editBtn;
     private TextView deleteBtn;
+    private User[] users = null;
     final Context ctx = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_language);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         listView = (ListView) findViewById(R.id.listViewLanguage);
-        final SettingItem[] list_values = new SettingItem[6];
-        list_values[0] = new SettingItem("Che Henry", false, null, 101);
-        list_values[1] = new SettingItem("Ndi Britha", false, null, 102);
-        list_values[2] = new SettingItem("Clovis", false, null, 103);
-        list_values[3] = new SettingItem("Jarvis", false, null, 104);
-        list_values[4] = new SettingItem("Michel", false, null, 105);
-        list_values[5] = new SettingItem("Jackson", false, null, 106);
-        adapter = new CustomAdapter(getBaseContext(),R.layout.settings_list_item,R.id.txtSettingsItem, list_values);
-        listView.setAdapter(adapter);
-        listView.setOnItemLongClickListener(optionListener);
+        loadUser();
+
+    }
+
+    public void loadUser(){
+        UserDAO userDAO = new UserDAO(ViewUsersActivity.this);
+        users = userDAO.getUsers();
+        if(users != null && users.length > 0){
+            final SettingItem[] list_values = new SettingItem[users.length];
+            for (int i = 0; i < users.length; i++){
+                list_values[i] = new SettingItem(users[i].getUsername(), false, null, users[i].getId());
+            }
+            adapter = new CustomAdapter(getBaseContext(),R.layout.settings_list_item,R.id.txtSettingsItem, list_values);
+            listView.setAdapter(adapter);
+            listView.setOnItemLongClickListener(optionListener);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -64,7 +75,10 @@ public class ViewUsersActivity extends AppCompatActivity {
                 Intent i;
                 @Override
                 public void onClick(View view) {
-                    i = new Intent(ViewUsersActivity.this,CreateUserActivity.class);
+
+                    i = new Intent(ViewUsersActivity.this,EditUserActivity.class);
+                    int id = itemSelected.getCode();
+                    i.putExtra("Id", id);
                     startActivity(i);
                 }
             });
@@ -78,10 +92,32 @@ public class ViewUsersActivity extends AppCompatActivity {
                     lg.setTitle(itemSelected.getText());
 
                     TextView cancelBtn = (TextView)lg.findViewById(R.id.userBtnNo);
+                    TextView yesBtn = (TextView)lg.findViewById(R.id.userBtnYes);
                     cancelBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             lg.dismiss();
+                        }
+                    });
+                    yesBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int id = itemSelected.getCode();
+                            UserDAO userDAO = new UserDAO(ViewUsersActivity.this);
+                            try {
+                                if(!userDAO.deleteUser(id)){
+                                    Toast.makeText(ViewUsersActivity.this,"An error occured during update", Toast.LENGTH_SHORT).show();
+                                    lg.cancel();
+                                }
+                                else{
+                                    loadUser();
+                                    lg.cancel();
+                                    dialog.cancel();
+                                }
+
+                            }catch (Exception e){
+                                Toast.makeText(ViewUsersActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
                     lg.show();

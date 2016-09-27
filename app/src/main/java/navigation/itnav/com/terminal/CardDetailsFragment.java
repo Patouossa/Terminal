@@ -2,14 +2,21 @@ package navigation.itnav.com.terminal;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -106,7 +113,45 @@ public class CardDetailsFragment extends Fragment {
                                 errors++;
                             }
                             if (errors == 0) {
-                                new SaveDetails(getActivity(), ed_firt_name, ed_last_name, ed_card_number, ed_exp_month, ed_exp_year, ed_cvv).execute(first_name, last_name, c_n, Integer.toString(exp_month), Integer.toString(exp_year), Integer.toString(cvv), card_type);
+                                try{
+                                    String result =  new SaveDetails(getActivity(), ed_firt_name, ed_last_name, ed_card_number, ed_exp_month, ed_exp_year, ed_cvv).execute(first_name, last_name, c_n, Integer.toString(exp_month), Integer.toString(exp_year), Integer.toString(cvv), card_type).get();
+                                    String jsonStr = result;
+                                    //Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+                                    if (jsonStr != null) {
+                                        try {
+                                            JSONObject jsonObj = new JSONObject(jsonStr);
+                                            String query_result = jsonObj.getString("status");
+                                            if (query_result.equals("OK")) {
+                                                //JSONArray data = jsonObj.getJSONArray("data");
+                                                //String[] time = data.getString(1).split(":");
+                                                //QrData qrdata = new QrData(data.getInt(0), new QrTime(new Time(Integer.parseInt(time[0]), Integer.parseInt(time[1]), Integer.parseInt(time[2]))), data.getString(2).charAt(0), data.getInt(3), data.getBoolean(4));
+                                                ed_cvv.setText(null);
+                                                ed_card_number.setText(null);
+                                                ed_last_name.setText(null);
+                                                ed_firt_name.setText(null);
+                                                ed_exp_month.setText(null);
+                                                ed_exp_year.setText(null);
+                                                Intent i = new Intent(getActivity(), PaymentActivity.class);
+                                                getActivity().startActivity(i);
+                                                Toast.makeText(getActivity(), "Data saved successfully.", Toast.LENGTH_SHORT).show();
+                                            } else if (query_result.equals("Error")) {
+                                                Toast.makeText(getActivity(), jsonObj.getString("error"), Toast.LENGTH_SHORT).show();
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                            Log.d("JSON", e.getMessage() + " ||| " + jsonStr);
+                                            Toast.makeText(getActivity(), "Error while parsing data."+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(getActivity(), "Couldn't get any JSON data.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                catch (InterruptedException ex){
+
+                                }
+                                catch (ExecutionException ex){
+
+                                }
                             }
                         } else {
                             Toast.makeText(ctx, "Invalid card number", Toast.LENGTH_LONG).show();

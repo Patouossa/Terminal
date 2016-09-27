@@ -92,7 +92,7 @@ public class SaveDetails  extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         // dismiss the dialog after getting all products
         pDialog.dismiss();
-        String jsonStr = result;
+        /*String jsonStr = result;
         //Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
         if (jsonStr != null) {
             try {
@@ -121,6 +121,7 @@ public class SaveDetails  extends AsyncTask<String, Void, String> {
             }
         } else {
             Toast.makeText(context, "Couldn't get any JSON data.", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
+
 }

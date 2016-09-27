@@ -16,22 +16,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import BO.User;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    User user = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        user = (User) getIntent().getExtras().get("User");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             Intent i;
             @Override
             public void onClick(View view) {
                 i = new Intent(MainActivity.this,CreateUserActivity.class);
+                i.putExtra("User", user);
                 startActivity(i);
             }
         });
@@ -92,16 +95,17 @@ public class MainActivity extends AppCompatActivity
             setTitle("Payment Terminal");
 
         } else if (id == R.id.nav_payment) {
-            /*PaymentFragment sf = new PaymentFragment();
+            PaymentFragment sf = new PaymentFragment();
+
             fragmentTransaction.add(R.id.fragment_container,sf);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
-            setTitle("Payment");*/
-            CardDetailsFragment sf = new CardDetailsFragment();
-            fragmentTransaction.add(R.id.fragment_container, sf);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-            setTitle("Edit card details");
+            setTitle("Make Payment");
+//            CardDetailsFragment sf = new CardDetailsFragment();
+//            fragmentTransaction.add(R.id.fragment_container, sf);
+//            fragmentTransaction.addToBackStack(null);
+//            fragmentTransaction.commit();
+//            setTitle("Edit card details");
 
         } else if (id == R.id.nav_reports) {
             ReportsFragment rf = new ReportsFragment();
@@ -119,6 +123,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_users) {
             UsersFragment uf = new UsersFragment();
+            uf.user = user;
             fragmentTransaction.add(R.id.fragment_container,uf);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
