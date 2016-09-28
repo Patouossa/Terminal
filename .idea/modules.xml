@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/PaymentTerminal.iml" filepath="$PROJECT_DIR$/PaymentTerminal.iml" />
       <module fileurl="file://$PROJECT_DIR$/SmartCardLib/SmartCardLib.iml" filepath="$PROJECT_DIR$/SmartCardLib/SmartCardLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/Terminal.iml" filepath="$PROJECT_DIR$/Terminal.iml" />
       <module fileurl="file://$PROJECT_DIR$/acssmc-1.1.1/acssmc-1.1.1.iml" filepath="$PROJECT_DIR$/acssmc-1.1.1/acssmc-1.1.1.iml" />
