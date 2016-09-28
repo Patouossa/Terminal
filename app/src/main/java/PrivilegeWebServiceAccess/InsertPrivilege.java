@@ -10,6 +10,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import util.Util;
+
 /**
  * Created by IBRAHIM on 24/09/2016.
  */
@@ -46,7 +48,7 @@ public class InsertPrivilege extends AsyncTask<String, Void, String> {
             data += "&idRight=" + URLEncoder.encode(idRight, "UTF-8");
             data += "&description=" + URLEncoder.encode(description, "UTF-8");
 
-            link = "http://192.168.173.1:82/terminal/Privilege/insert_privilege.php" + data;
+            link = Util.BASE_URL + "Privilege/insert_privilege.php" + data;
             URL url = new URL(link);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 

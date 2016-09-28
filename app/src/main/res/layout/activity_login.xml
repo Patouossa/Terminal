@@ -35,6 +35,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edtLoginUserName"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
         android:layout_marginBottom="25dp"/>
 
     <TextView
@@ -48,6 +50,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
         android:ems="10"
         android:id="@+id/edtLoginPassword" />
 

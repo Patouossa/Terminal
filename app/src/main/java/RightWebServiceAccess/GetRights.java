@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import util.Util;
+
 /**
  * Created by IBRAHIM on 24/09/2016.
  */
@@ -40,7 +42,7 @@ public class GetRights  extends AsyncTask<String, Void, String> {
 
         try {
 
-            link = "http://192.168.173.1:82/terminal/Right/get_rights.php";
+            link = Util.BASE_URL + "Right/get_rights.php";
             URL url = new URL(link);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 

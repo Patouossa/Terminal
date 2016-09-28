@@ -10,6 +10,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import util.Util;
+
 /**
  * Created by IBRAHIM on 24/09/2016.
  */
@@ -44,7 +46,7 @@ public class InsertRight extends AsyncTask<String, Void, String> {
             data = "?code=" + URLEncoder.encode(code, "UTF-8");
             data += "&description=" + URLEncoder.encode(description, "UTF-8");
 
-            link = "http://192.168.173.1:82/terminal/Right/insert_right.php" + data;
+            link = Util.BASE_URL + "Right/insert_right.php" + data;
             URL url = new URL(link);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 

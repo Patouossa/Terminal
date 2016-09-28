@@ -220,6 +220,7 @@ public class UserDAO {
         if(username != "" && password != ""){
             try{
                 String result = new LoginUser(context).execute(username, password).get();
+                System.out.println("LoginResult = "+result);
                 if (result != null) {
                     try {
                         JSONObject jsonObj = new JSONObject(result);

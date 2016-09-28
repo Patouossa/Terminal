@@ -10,6 +10,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import util.Util;
+
 /**
  * Created by IBRAHIM on 24/09/2016.
  */
@@ -48,7 +50,7 @@ public class InsertBill  extends AsyncTask<String, Void, String> {
             data += "&status=" + URLEncoder.encode(status, "UTF-8");
             data += "&insertUser=" + URLEncoder.encode(insertUser, "UTF-8");
 
-            link = "http://192.168.173.1:82/terminal/Bill/insert_bill.php" + data;
+            link = Util.BASE_URL + "Bill/insert_bill.php" + data;
             URL url = new URL(link);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 

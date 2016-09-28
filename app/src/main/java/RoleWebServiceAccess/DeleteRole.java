@@ -10,6 +10,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import util.Util;
+
 /**
  * Created by IBRAHIM on 23/09/2016.
  */
@@ -42,7 +44,7 @@ public class DeleteRole  extends AsyncTask<String, Void, String> {
         try {
             data = "?id=" + URLEncoder.encode(id, "UTF-8");
 
-            link = "http://192.168.173.1:82/terminal/Role/delete_role.php" + data;
+            link = Util.BASE_URL + "Role/delete_role.php" + data;
             URL url = new URL(link);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 

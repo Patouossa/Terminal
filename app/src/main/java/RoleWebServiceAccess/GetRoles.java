@@ -18,6 +18,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import navigation.itnav.com.terminal.PaymentActivity;
+import util.Util;
 
 /**
  * Created by IBRAHIM on 23/09/2016.
@@ -50,7 +51,7 @@ public class GetRoles extends AsyncTask<String, Void, String> {
 
         try {
 
-            link = "http://192.168.173.1:82/terminal/Role/get_roles.php";
+            link = Util.BASE_URL + "Role/get_roles.php";
             URL url = new URL(link);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 

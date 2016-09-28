@@ -16,11 +16,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+
 import BO.User;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     User user = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +99,16 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_payment) {
             PaymentFragment sf = new PaymentFragment();
-
+            /**
+             * Added by Armand - 27/09/2016 - to pass user data to Payment Fragment
+             * Start
+             */
+            Bundle b = new Bundle();
+            b.putSerializable("user", user);
+            sf.setArguments(b);
+            /**
+             * End
+             */
             fragmentTransaction.add(R.id.fragment_container,sf);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
@@ -106,6 +118,7 @@ public class MainActivity extends AppCompatActivity
 //            fragmentTransaction.addToBackStack(null);
 //            fragmentTransaction.commit();
 //            setTitle("Edit card details");
+
 
         } else if (id == R.id.nav_reports) {
             ReportsFragment rf = new ReportsFragment();
