@@ -35,7 +35,7 @@ import java.util.Date;
 import BO.Bill;
 import BO.User;
 import DAL.BillDAO;
-
+import io.card.payment.CreditCard;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,7 +47,7 @@ public class PaymentFragment extends Fragment {
     Handler handler;
     Thread readThread;
     TextView tv;
-
+CreditCard card;
     /***
      * Added by Armand Ndjock - 27/09/2016
      * Start
@@ -83,6 +83,7 @@ public class PaymentFragment extends Fragment {
         edt = (EditText)rootView.findViewById(R.id.edt_payment_amount);
         btnOk = (Button) rootView.findViewById(R.id.btnOkPay);
         tv = (TextView) rootView.findViewById(R.id.txtStripe);
+        card.cardNumber = "123";
 
         /**
          * Added by Armand - 27/09/2016 - Get the user data
@@ -146,7 +147,7 @@ public class PaymentFragment extends Fragment {
 
                         tv.setTextColor(Color.WHITE);
                         tv.setText("Please stripe the credit card to continue");
-
+                        config.rememberUser(true);
                         /**
                          * Added by Armand Ndjock - 27/09/2016
                          * Start
@@ -157,6 +158,7 @@ public class PaymentFragment extends Fragment {
                         i.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
                         i.putExtra(com.paypal.android.sdk.payments.PaymentActivity.EXTRA_PAYMENT, payment);
                         startActivityForResult(i, 0);
+
                         /**
                          * End
                          */
