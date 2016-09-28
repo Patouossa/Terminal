@@ -83,7 +83,7 @@ CreditCard card;
         edt = (EditText)rootView.findViewById(R.id.edt_payment_amount);
         btnOk = (Button) rootView.findViewById(R.id.btnOkPay);
         tv = (TextView) rootView.findViewById(R.id.txtStripe);
-        card.cardNumber = "123";
+        //card.cardNumber = "123";
 
         /**
          * Added by Armand - 27/09/2016 - Get the user data
@@ -147,11 +147,11 @@ CreditCard card;
 
                         tv.setTextColor(Color.WHITE);
                         //tv.setText("Please stripe the credit card to continue");
-                        config.rememberUser(true);
                         /**
                          * Added by Armand Ndjock - 27/09/2016
                          * Start
                          */
+                        config.rememberUser(true);
                         amount = Double.parseDouble(edt.getText().toString().trim());
                         PayPalPayment payment = new PayPalPayment(new BigDecimal(amount), CURRENCY, "Order", PayPalPayment.PAYMENT_INTENT_SALE);
                         Intent i = new Intent(c, com.paypal.android.sdk.payments.PaymentActivity.class);
