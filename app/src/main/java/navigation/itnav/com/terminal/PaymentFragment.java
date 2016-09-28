@@ -146,7 +146,7 @@ CreditCard card;
                     try{
 
                         tv.setTextColor(Color.WHITE);
-                        tv.setText("Please stripe the credit card to continue");
+                        //tv.setText("Please stripe the credit card to continue");
                         config.rememberUser(true);
                         /**
                          * Added by Armand Ndjock - 27/09/2016
